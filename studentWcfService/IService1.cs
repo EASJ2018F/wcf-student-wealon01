@@ -17,7 +17,7 @@ namespace studentWcfService
         [OperationContract]
         void AddStudent(string navn, string klasseNavn, string rum);
 
-
+    
         [OperationContract]
         Student FindStudents(string navn);
 
