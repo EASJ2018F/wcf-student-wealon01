@@ -28,6 +28,7 @@ namespace studentWcfService
             aa.Navn = newnavn;
             aa.KlasseNavn = klasseNavn;
             aa.Rum = rum;
+
         }
 
   
