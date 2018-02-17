@@ -12,36 +12,28 @@ namespace studentWcfService
     [ServiceContract]
     public interface IService1
     {
+  
 
         [OperationContract]
-        string GetData(int value);
+        void AddStudent(string navn, string klasseNavn, string rum);
+
 
         [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
-
-        // TODO: Add your service operations here
-    }
+        Student FindStudents(string navn);
 
 
-    // Use a data contract as illustrated in the sample below to add composite types to service operations.
-    [DataContract]
-    public class CompositeType
-    {
-        bool boolValue = true;
-        string stringValue = "Hello ";
+        [OperationContract]
+        List<Student> GetAllStudent();
 
-        [DataMember]
-        public bool BoolValue
-        {
-            get { return boolValue; }
-            set { boolValue = value; }
-        }
 
-        [DataMember]
-        public string StringValue
-        {
-            get { return stringValue; }
-            set { stringValue = value; }
-        }
+        [OperationContract]
+        void RemoveStudent(string navn);
+
+
+        [OperationContract]
+
+        void EditStudent(string navn, string newnavn, string klasseNavn, string rum);
+
+
     }
 }

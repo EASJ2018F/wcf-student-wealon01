@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -7,27 +8,47 @@ using System.ServiceModel.Web;
 using System.Text;
 
 namespace studentWcfService
-{
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
+{   
     public class Service1 : IService1
     {
-        public string GetData(int value)
+          static List<Student> elev = new List<Student>();
+
+
+        public void AddStudent(string navn, string klasseNavn, string rum)
         {
-            return string.Format("You entered: {0}", value);
+            elev.Add(new Student(navn, klasseNavn, rum));
+            
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+
+        public void EditStudent(string navn, string newnavn, string klasseNavn, string rum)
         {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
+            Student aa = elev.Find(x => x.Navn == navn);
+        
+            aa.Navn = newnavn;
+            aa.KlasseNavn = klasseNavn;
+            aa.Rum = rum;
         }
+
+  
+        public Student FindStudents(string navn)
+        {           
+            return elev.Find(x => x.Navn == navn);
+        }
+
+
+        public List<Student> GetAllStudent()
+        {
+            return elev;
+        }
+  
+
+        public void RemoveStudent(string navn)
+        {
+            elev.Remove(FindStudents(navn));
+        }
+
     }
-}
+} 
+
+       
